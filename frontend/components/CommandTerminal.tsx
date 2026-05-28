@@ -645,7 +645,7 @@ function ChatChartCard({ snap }: { snap: ChartSnapshot }) {
                 fontFamily: 'var(--font-mono)'
               }}
               itemStyle={{ color: 'var(--color-text-primary)' }}
-              formatter={(val: number) => [`$${val.toFixed(2)}`, "Price"]}
+              formatter={(val: any) => [`$${Number(val).toFixed(2)}`, "Price"]}
             />
             <Line 
               type="monotone" 
