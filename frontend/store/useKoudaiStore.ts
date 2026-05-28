@@ -354,7 +354,7 @@ function normalize(input: string): string {
  */
 function matches(lower: string, norm: string, keywords: string[]): boolean {
   return keywords.some(
-    (kw) => lower.includes(kw) || norm.includes(normalize(kw))
+    (kw) => new RegExp(`\\b${kw}\\b`).test(lower) || new RegExp(`\\b${normalize(kw)}\\b`).test(norm)
   );
 }
 
@@ -427,11 +427,11 @@ async function generateAiResponse(
     "feature", "capabilities", "capability",
   ])) {
     const help = pick([
-      `Here's what I can do 🗡️\n\n**Trading**\n→ \`Buy [amount] [token] at market price\`\n→ \`Sell $[amount] worth of [token]\`\n→ \`Buy [amount] [token] at $[price] limit\`\n\n**Portfolio**\n→ \`My portfolio\` — balances & wallet info\n\n**Chat**\n→ Ask me anything in plain language\n\nAll trades simulate on **Injective Testnet**. No real funds at risk.`,
+      `Here's what I can do 🗡️\n\n**⚡ Trading**\n→ \`Buy 10 INJ at market price\`\n→ \`Sell $50 worth of ATOM\`\n→ \`Swap 5 INJ to BLD\`\n\n**💬 Chat & Info**\n→ \`Price of ATONE\`\n→ \`Show INJ chart\`\n→ \`My portfolio\`\n\nAll trades simulate on **Injective Testnet**. No real funds at risk.`,
 
-      `Glad you asked! I can:\n\n⚡ **Execute trades** — market or limit orders on Injective\n📊 **Show your portfolio** — wallet balance & address\n💬 **Chat** — answer questions about your account & the dojo\n\nSome examples:\n→ \`Buy 10 INJ at market price\`\n→ \`Sell 5 ATOM at $4 limit\`\n→ \`Show my portfolio\``,
+      `Glad you asked! I can:\n\n⚡ **Execute trades** — buy, sell, or swap on Injective\n📈 **Market Data** — check live prices & 7-day charts\n📊 **Show your portfolio** — wallet balance & address\n\nSome examples:\n→ \`Swap 10 INJ for ATOM\`\n→ \`What is the price of BLD?\`\n→ \`Show my portfolio\``,
 
-      `My capabilities as a DeFi shinobi:\n\n1. **Parse** your natural language trade intents via Gemini AI\n2. **Validate** orders against market constraints\n3. **Execute** on Injective Testnet instantly\n4. **Report** your wallet & portfolio status\n\nJust type what you want — I'll figure out the rest.`,
+      `My capabilities as a DeFi shinobi:\n\n1. **Parse** your natural language trade intents (Buy/Sell/Swap) \n2. **Check Markets** (e.g., "Price of INJ" or "ATOM chart")\n3. **Execute** on Injective Testnet instantly\n4. **Report** your wallet & portfolio status\n\nJust type what you want — I'll figure out the rest.`,
     ]);
     return { message: help };
   }
