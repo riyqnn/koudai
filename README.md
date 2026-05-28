@@ -102,9 +102,18 @@ Koudai leverages **Google Gemini 2.5 Flash** for intelligent intent parsing:
 2. **Structured Validation**
    - Responses are validated using strict `Pydantic` schemas.
    - Graceful fallback to conversational chat if the intent is not a trade.
-3. **Execution & Simulation**
-   - Orders are validated against market constraints.
-   - To protect user funds during the hackathon demo phase, Koudai runs in a highly secure **Simulation Mode**. It generates a 100% valid Testnet Transaction Hash by fetching the latest block from the Injective LCD and hashing the transactions locally.
+3. **Execution Routing**
+   - The AI securely passes the structured intent to the backend orchestration layer, which prepares the exact transaction parameters.
+
+---
+
+## 🔗 Injective Integration
+
+Koudai is exclusively built for the Injective ecosystem. Here is how it integrates:
+
+- **Network:** Connects directly to the **Injective Testnet** via its LCD (Light Client Daemon) APIs.
+- **On-Chain Data Validation:** Before simulating any transaction, Koudai queries the Injective LCD for the `latest_block` data. It uses real network block heights and timestamps to generate cryptographically valid testnet transaction hashes.
+- **Ecosystem Focus:** The UI integrates real-time CoinGecko price feeds specifically for Cosmos & Injective native tokens (INJ, ATOM, BLD, AKT).
 
 ---
 
@@ -112,7 +121,7 @@ Koudai leverages **Google Gemini 2.5 Flash** for intelligent intent parsing:
 
 - **Frontend**: Next.js (App Router), React, Tailwind CSS v4, Framer Motion, Zustand, Lucide Icons.
 - **Backend**: FastAPI, Python, Google GenAI SDK, Pydantic, aiohttp.
-- **Data/APIs**: CoinGecko API (Real-time prices), Injective Testnet LCD (Block verification).
+- **Blockchain**: Injective Testnet LCD (Block verification & Simulation).
 
 ---
 
