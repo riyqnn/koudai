@@ -254,7 +254,7 @@ const PHASE_MESSAGES: Record<AgentPhase, string> = {
 
 /* ── Mock Simulation Helpers (replace with real API calls) ─────────────── */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://koudai-be.vercel.app/api";
 
 async function parseIntentFromAPI(input: string): Promise<TradingIntent> {
   const res = await fetch(`${API_URL}/parse`, {
