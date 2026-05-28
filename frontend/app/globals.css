@@ -1,0 +1,626 @@
+/**
+ * Koudai — Global Styles (Tailwind CSS v4)
+ * Theme: "Cyber-Shinobi" (Neo-Cyberpunk × Ninja Aesthetics)
+ *
+ * Tailwind v4 uses a CSS-first configuration model:
+ *  @import   — brings in Tailwind itself
+ *  @theme    — defines all design tokens (replaces tailwind.config.ts extends)
+ *  base      — global resets
+ *  components — reusable class utilities (pure CSS, no @apply with custom tokens)
+ *  utilities  — helper classes
+ */
+
+/* ── Google Fonts ─────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+
+/* ── Tailwind v4 Core ─────────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════════════════
+   @theme — Design Tokens (Tailwind v4 CSS-first config)
+   These replace the `theme.extend` block in tailwind.config.ts
+══════════════════════════════════════════════════════════════════════════ */
+@theme {
+  /* ─ Color Palette ────────────────────────────────────────────────── */
+
+  /* Void Blacks (backgrounds) */
+  --color-void-950: #04050A;
+  --color-void-900: #080A0E;
+  --color-void-800: #0D0F14;
+  --color-void-700: #12151C;
+  --color-void-600: #181C25;
+  --color-void-500: #1E222E;
+
+  /* Crimson (primary accent — aggression, action) */
+  --color-crimson:      #FF2D55;
+  --color-crimson-50:   #FFF0F3;
+  --color-crimson-100:  #FFD6DE;
+  --color-crimson-200:  #FFB3C1;
+  --color-crimson-300:  #FF7A94;
+  --color-crimson-400:  #FF4D6D;
+  --color-crimson-500:  #FF2D55;
+  --color-crimson-600:  #E60040;
+  --color-crimson-700:  #CC0039;
+  --color-crimson-800:  #990030;
+  --color-crimson-900:  #66001F;
+
+  /* Cyber Cyan (secondary accent — data, status) */
+  --color-neon-cyan:      #00FFCC;
+  --color-neon-cyan-50:   #E0FFF9;
+  --color-neon-cyan-100:  #AAFFF0;
+  --color-neon-cyan-200:  #66FFE8;
+  --color-neon-cyan-300:  #33FFDF;
+  --color-neon-cyan-400:  #00FFD5;
+  --color-neon-cyan-500:  #00FFCC;
+  --color-neon-cyan-600:  #00D9AD;
+  --color-neon-cyan-700:  #00A882;
+  --color-neon-cyan-800:  #007A5E;
+  --color-neon-cyan-900:  #004D3B;
+
+  /* Katana Silver (muted UI chrome) */
+  --color-silver-50:  #F3F5F8;
+  --color-silver-100: #DEE2EB;
+  --color-silver-200: #BEC6D5;
+  --color-silver-300: #A0ABBC;
+  --color-silver-400: #8892A4;
+  --color-silver-500: #6E798D;
+  --color-silver-600: #556070;
+  --color-silver-700: #3E4754;
+  --color-silver-800: #282E39;
+  --color-silver-900: #14181F;
+
+  /* Gold (confidence, warnings) */
+  --color-gold:       #F5A623;
+  --color-gold-400:   #FFB84D;
+  --color-gold-500:   #F5A623;
+  --color-gold-600:   #D48A0A;
+
+  /* ─ Typography ───────────────────────────────────────────────────── */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* ─ Border Radius (sharp Neo-Brutalist) ─────────────────────────── */
+  --radius-sm:   2px;
+  --radius:      4px;
+  --radius-md:   4px;
+  --radius-lg:   6px;
+  --radius-xl:   8px;
+  --radius-2xl:  10px;
+
+  /* ─ Box Shadows ─────────────────────────────────────────────────── */
+  --shadow-glow-crimson:    0 0 12px rgba(255,45,85,0.6), 0 0 40px rgba(255,45,85,0.15);
+  --shadow-glow-cyan:       0 0 12px rgba(0,255,204,0.6), 0 0 40px rgba(0,255,204,0.15);
+  --shadow-glow-sm-crimson: 0 0 6px rgba(255,45,85,0.5);
+  --shadow-glow-sm-cyan:    0 0 6px rgba(0,255,204,0.5);
+  --shadow-hard:            4px 4px 0px #FF2D55;
+  --shadow-hard-cyan:       4px 4px 0px #00FFCC;
+  --shadow-hard-sm:         2px 2px 0px #FF2D55;
+  --shadow-panel:           inset 0 1px 0 rgba(255,255,255,0.04);
+
+  /* ─ Animations ───────────────────────────────────────────────────── */
+  --animate-blink:        blink 1s step-end infinite;
+  --animate-scan:         scan 4s linear infinite;
+  --animate-pulseGlow:    pulseGlow 2s ease-in-out infinite;
+  --animate-sliceIn:      sliceInRight 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
+  --animate-flicker:      flicker 6s linear infinite;
+  --animate-dataStream:   dataStream 0.2s ease-out forwards;
+  --animate-shimmer:      shimmer 2s linear infinite;
+
+  /* ─ Font Size Additions ─────────────────────────────────────────── */
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 1rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   @keyframes
+══════════════════════════════════════════════════════════════════════════ */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(255,45,85,0.4); }
+  50%       { box-shadow: 0 0 20px rgba(255,45,85,0.9); }
+}
+
+@keyframes sliceInRight {
+  0%   { transform: translateX(40px) skewX(-4deg); opacity: 0; }
+  100% { transform: translateX(0) skewX(0deg); opacity: 1; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92%       { opacity: 1; }
+  93%       { opacity: 0.3; }
+  94%       { opacity: 1; }
+  96%       { opacity: 0.6; }
+  97%       { opacity: 1; }
+}
+
+@keyframes dataStream {
+  0%   { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Base Layer — Global resets & element defaults
+══════════════════════════════════════════════════════════════════════════ */
+@layer base {
+  :root {
+    /* Semantic aliases */
+    --bg-base:       var(--color-void-950);
+    --bg-surface:    var(--color-void-800);
+    --bg-elevated:   var(--color-void-700);
+    --bg-overlay:    var(--color-void-600);
+
+    --text-primary:   #F0F2F5;
+    --text-secondary: var(--color-silver-400);
+    --text-muted:     var(--color-silver-700);
+    --text-accent:    var(--color-crimson);
+
+    --border-subtle:  rgba(136, 146, 164, 0.12);
+    --border-bright:  rgba(136, 146, 164, 0.28);
+    --border-accent:  rgba(255, 45, 85, 0.4);
+    --border-cyan:    rgba(0, 255, 204, 0.4);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    scrollbar-gutter: stable;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--bg-base);
+    background-image:
+      linear-gradient(rgba(136, 146, 164, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(136, 146, 164, 0.04) 1px, transparent 1px),
+      radial-gradient(ellipse 80% 50% at 10% 20%, rgba(255, 45, 85, 0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 80%, rgba(0, 255, 204, 0.04) 0%, transparent 60%);
+    background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  code, kbd, samp, pre { font-family: var(--font-mono); }
+
+  ::selection {
+    background-color: rgba(255, 45, 85, 0.3);
+    color: #F0F2F5;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-crimson);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ── Custom Scrollbar ─────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-crimson); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Component Classes — Pure CSS (no @apply with custom tokens)
+   These are semantic class names for the Koudai design system.
+══════════════════════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ─ Panels ────────────────────────────────────────────────────────── */
+
+  .kd-panel {
+    position: relative;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .kd-panel-accent {
+    position: relative;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-left: 2px solid var(--color-crimson);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .kd-card {
+    position: relative;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-panel);
+    transition: border-color 200ms ease, background-color 200ms ease;
+  }
+
+  .kd-card:hover {
+    border-color: var(--border-bright);
+    background-color: var(--bg-elevated);
+  }
+
+  /* ─ Buttons ───────────────────────────────────────────────────────── */
+
+  .kd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    border: none;
+  }
+
+  .kd-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--color-crimson);
+    color: white;
+    border: 1px solid var(--color-crimson-700);
+    transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .kd-btn-primary:hover {
+    background-color: var(--color-crimson-600);
+    box-shadow: var(--shadow-hard-sm);
+  }
+
+  .kd-btn-primary:active {
+    background-color: var(--color-crimson-700);
+    box-shadow: none;
+    transform: translate(2px, 2px);
+  }
+
+  .kd-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--color-silver-400);
+    border: 1px solid var(--border-bright);
+    transition: all 150ms ease;
+  }
+
+  .kd-btn-secondary:hover {
+    border-color: var(--border-accent);
+    color: var(--color-crimson);
+  }
+
+  .kd-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    padding: 0.375rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--color-silver-400);
+    border: 1px solid transparent;
+    transition: all 150ms ease;
+  }
+
+  .kd-btn-ghost:hover {
+    background-color: var(--bg-overlay);
+    color: var(--text-primary);
+  }
+
+  .kd-btn-cyan {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--color-neon-cyan);
+    border: 1px solid var(--border-cyan);
+    transition: all 150ms ease;
+  }
+
+  .kd-btn-cyan:hover {
+    background-color: rgba(0, 255, 204, 0.1);
+    box-shadow: var(--shadow-glow-sm-cyan);
+  }
+
+  /* ─ Input ─────────────────────────────────────────────────────────── */
+
+  .kd-input {
+    width: 100%;
+    background-color: var(--color-void-950);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    padding: 0.625rem 0.75rem;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .kd-input::placeholder { color: var(--color-silver-700); }
+
+  .kd-input:focus {
+    outline: none;
+    border-color: var(--color-crimson);
+    box-shadow: var(--shadow-glow-sm-crimson);
+  }
+
+  /* ─ Badges ────────────────────────────────────────────────────────── */
+
+  .kd-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .kd-badge-crimson {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: rgba(255, 45, 85, 0.1);
+    color: var(--color-crimson);
+    border: 1px solid rgba(255, 45, 85, 0.2);
+  }
+
+  .kd-badge-cyan {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: rgba(0, 255, 204, 0.1);
+    color: var(--color-neon-cyan);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .kd-badge-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: rgba(245, 166, 35, 0.1);
+    color: var(--color-gold-400);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+  }
+
+  .kd-badge-silver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: rgba(136, 146, 164, 0.1);
+    color: var(--color-silver-400);
+    border: 1px solid rgba(136, 146, 164, 0.2);
+  }
+
+  /* ─ Labels ────────────────────────────────────────────────────────── */
+
+  .kd-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-silver-500);
+  }
+
+  /* ─ Dividers ──────────────────────────────────────────────────────── */
+
+  .kd-divider {
+    height: 1px;
+    width: 100%;
+    background-color: var(--border-subtle);
+  }
+
+  .kd-divider-accent {
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-crimson) 0%, transparent 100%);
+  }
+
+  /* ─ Status Dots ───────────────────────────────────────────────────── */
+
+  .kd-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .kd-dot-live {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: var(--color-neon-cyan);
+    box-shadow: 0 0 4px rgba(0, 255, 204, 0.8);
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  .kd-dot-error {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: var(--color-crimson);
+    box-shadow: 0 0 4px rgba(255, 45, 85, 0.8);
+  }
+
+  .kd-dot-idle {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: var(--color-silver-600);
+  }
+
+  /* ─ Terminal Cursor ───────────────────────────────────────────────── */
+
+  .kd-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background-color: var(--color-crimson);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* ─ Glow Text ─────────────────────────────────────────────────────── */
+
+  .kd-glow-text-crimson {
+    text-shadow: 0 0 8px rgba(255, 45, 85, 0.8), 0 0 24px rgba(255, 45, 85, 0.3);
+  }
+
+  .kd-glow-text-cyan {
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.8), 0 0 24px rgba(0, 255, 204, 0.3);
+  }
+
+  /* ─ Section Title ─────────────────────────────────────────────────── */
+
+  .kd-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-silver-400);
+  }
+
+  .kd-section-title::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 1rem;
+    background-color: var(--color-crimson);
+    flex-shrink: 0;
+  }
+
+  /* ─ Skeleton Loading ──────────────────────────────────────────────── */
+
+  .kd-skeleton {
+    background: linear-gradient(90deg, var(--color-void-600) 0%, var(--color-void-500) 50%, var(--color-void-600) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+    border-radius: var(--radius);
+  }
+
+  /* ─ Terminal Scroll ───────────────────────────────────────────────── */
+
+  .kd-terminal-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 45, 85, 0.3) transparent;
+  }
+
+  .kd-terminal-scroll::-webkit-scrollbar { width: 3px; }
+  .kd-terminal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 45, 85, 0.3);
+    border-radius: 2px;
+  }
+
+  /* ─ Truncate Address ──────────────────────────────────────────────── */
+
+  .truncate-address {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ─ No Scrollbar ──────────────────────────────────────────────────── */
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* ─ Flex Helpers ──────────────────────────────────────────────────── */
+
+  .flex-center  { display: flex; align-items: center; justify-content: center; }
+  .flex-between { display: flex; align-items: center; justify-content: space-between; }
+  .flex-start   { display: flex; align-items: center; justify-content: flex-start; }
+}

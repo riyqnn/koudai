@@ -1,0 +1,15 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+log_cli = true
+log_cli_level = "WARNING"
+markers = [
+    "unit: Fast unit tests with no I/O",
+    "integration: Tests requiring network or testnet access",
+]
+
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "standard"
+reportMissingImports = true
+reportMissingTypeStubs = false

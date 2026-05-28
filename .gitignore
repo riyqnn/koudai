@@ -1,0 +1,51 @@
+# === Environment & Secrets ===
+.env
+*.env
+.env.*
+!.env.example
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+
+# === Virtual Environments ===
+venv/
+.venv/
+env/
+ENV/
+
+# === Testing ===
+.pytest_cache/
+.coverage
+htmlcov/
+*.coveragerc
+coverage.xml
+
+# === Logs ===
+logs/
+*.log
+*.jsonl
+
+# === IDE / OS ===
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# === Streamlit ===
+.streamlit/secrets.toml
+
+# === Injective / Wallet ===
+*.pem
+*.key
+wallet_export*.json
